@@ -1,0 +1,467 @@
+@use "./colors" as *;
+
+html {
+	font-size: 62.5%;
+	scroll-behavior: smooth;
+}
+
+body {
+	font-size: 1.6rem;
+	font-family: "Raleway", sans-serif;
+	color: $white;
+	background-color: $dark;
+}
+
+h1.company-name {
+	margin-bottom: 0.5em;
+	font-size: 3rem;
+	font-family: "Cinzel", serif;
+	color: $gold;
+}
+
+.wrapper {
+	margin: 0 auto;
+	max-width: 1200px;
+	width: 100%;
+}
+
+.section-title {
+	margin: auto 0;
+	text-align: center;
+	font-size: 4rem;
+	font-weight: 300;
+	color: $gold;
+	&-lane {
+		position: relative;
+		&::after {
+			position: absolute;
+			content: "";
+			bottom: -10%;
+			left: 0;
+			width: 90%;
+			height: 4px;
+			background-color: $gold;
+		}
+	}
+	&-bold {
+		font-weight: bold;
+	}
+}
+//header----------------------------------------
+.header {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: repeat(2, 1fr);
+	height: 100vh;
+	position: relative;
+	overflow: hidden;
+
+	&__text {
+		display: grid;
+		justify-content: center;
+		align-content: center;
+		grid-row: 2/3;
+		grid-column: 1/3;
+		padding: 2em;
+
+		p {
+			font-weight: 200;
+		}
+	}
+
+	&__img {
+		grid-row: 1/2;
+		grid-column: 1/3;
+		position: relative;
+		width: 100%;
+		height: 100%;
+		background-position: center;
+		background-size: cover;
+		background-image: url("../img/headerSmall.jpg");
+		filter: sepia();
+	}
+
+	&__shadow {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.3);
+	}
+
+	&__arrow {
+		display: none;
+	}
+
+	&__bg-icon-one,
+	&__bg-icon-two {
+		position: absolute;
+		opacity: 0.05;
+		z-index: -5;
+		animation: rotate-right 55s infinite linear;
+	}
+
+	&__bg-icon-one {
+		bottom: 2em;
+		right: -3em;
+		width: 50%;
+	}
+
+	&__bg-icon-two {
+		display: none;
+	}
+}
+
+.hamburger {
+	position: fixed;
+	top: 3em;
+	left: 1em;
+	transform: translateY(-50%);
+	z-index: 1000;
+
+	&-inner,
+	&-inner::after,
+	&-inner::before {
+		background-color: $white;
+		z-index: 1000;
+	}
+	&--darkColor,
+	&--darkColor::after,
+	&--darkColor::before {
+		background-color: $dark;
+	}
+}
+
+.nav {
+	&-mobile {
+		position: fixed;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		top: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		background-color: $white;
+		z-index: 10;
+		transform: translateX(-102%);
+		transition: transform 0.3s;
+
+		&--active {
+			transform: translateX(0);
+		}
+	}
+
+	&-desktop {
+		display: none;
+	}
+
+	&__link {
+		position: relative;
+		display: inline-block;
+		margin: 0.5em;
+		padding: 0.5em;
+		font-size: 2.3rem;
+		color: $darker;
+		text-decoration: none;
+		text-transform: uppercase;
+		transition: color 0.3s;
+
+		&:hover {
+			color: $gold;
+		}
+	}
+}
+
+.cards {
+	padding: 10rem 2em;
+	background-color: $darker;
+	overflow: hidden;
+	&__allCards {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: repeat(3, 1fr);
+		gap: 5rem 0;
+	}
+	&__card {
+		position: relative;
+		display: flex;
+		padding: 3rem;
+		height: 30rem;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		border: 1px solid transparent;
+		border-radius: 4px;
+		background-color: $dark;
+		transition: background-color 0.5s, border 0.5s;
+		z-index: 5;
+		&::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			border: 1px solid $gold;
+			border-radius: 4px;
+			opacity: 0;
+		}
+		&:hover::before {
+			animation: pulse 1s;
+		}
+		&:hover {
+			background-color: $darker;
+			border: 1px solid $gold;
+			z-index: 1;
+		}
+		&--first {
+			grid-row: 1/2;
+			grid-column: 1/2;
+		}
+		&--second {
+			grid-row: 2/3;
+			grid-column: 1/2;
+		}
+		&--third {
+			grid-row: 3/4;
+			grid-column: 1/2;
+		}
+		&-img {
+			margin-bottom: 2rem;
+			width: 70px;
+		}
+		&-title {
+			margin-bottom: 1.2rem;
+			text-transform: uppercase;
+			font-size: 2.5rem;
+		}
+	}
+}
+
+.invest {
+	padding: 10rem 2em;
+	.section-title {
+		grid-column: 1/2;
+		grid-row: 1/2;
+	}
+	&__allBoxes {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: 150px repeat(3, 1fr);
+		gap: 5rem 0;
+	}
+	&__box {
+		width: 1fr;
+		&--first {
+			grid-column: 1/2;
+			grid-row: 2/3;
+		}
+		&--second {
+			grid-column: 1/2;
+			grid-row: 3/4;
+		}
+		&--third {
+			grid-column: 1/2;
+			grid-row: 4/5;
+		}
+		&-img {
+			width: 100%;
+			filter: sepia();
+		}
+		&-textPlace {
+			padding: 10rem 0;
+		}
+		&-title {
+			padding: 1.5rem 0;
+			font-size: 3rem;
+			color: $gold;
+			font-weight: 300;
+			letter-spacing: 2px;
+		}
+		&-text {
+			padding: 0.7rem 0;
+			font-size: 1.4rem;
+		}
+		&-right {
+			position: relative;
+			padding: 1.5rem 0;
+			&-link {
+				position: absolute;
+				bottom: 0;
+				right: 0;
+				text-align: end;
+				font-weight: bold;
+				font-size: 2rem;
+				text-decoration: none;
+				color: $gold;
+				transition: color 0.3s;
+
+				&:hover {
+					color: $darkgold;
+				}
+			}
+		}
+	}
+	&__icon {
+		display: none;
+	}
+}
+
+.future {
+	padding: 10rem 2em;
+	background-color: $darker;
+	.section-title {
+		padding-bottom: 8rem;
+	}
+	&__boxes {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: repeat(3, 1fr);
+		&-box {
+			position: relative;
+			display: flex;
+			padding: 3rem;
+			margin-bottom: 4rem;
+			flex-direction: column;
+			align-items: center;
+			text-align: center;
+			border-radius: 4px;
+			background-color: $dark;
+			border: 1px solid transparent;
+			z-index: 5;
+			transition: background-color 0.5s, border 0.5s;
+			&:hover {
+				background-color: $darker;
+				border: 1px solid $gold;
+				z-index: 1;
+			}
+			&--first {
+				grid-column: 1/2;
+				grid-row: 1/2;
+			}
+			&--second {
+				grid-column: 1/2;
+				grid-row: 2/3;
+			}
+			&--third {
+				grid-column: 1/2;
+				grid-row: 3/4;
+			}
+			&-icon {
+				width: 7rem;
+			}
+			&-title {
+				padding: 1.5rem;
+				font-size: 2rem;
+				color: $gold;
+			}
+			&-list {
+				padding-bottom: 1rem;
+				list-style: none;
+				&--first {
+					font-size: 1.7rem;
+					font-weight: bold;
+					padding-bottom: 0.5rem;
+				}
+			}
+		}
+	}
+}
+
+.newsletter {
+	padding: 10rem 2em;
+	background-color: $red;
+	text-align: center;
+	&__box {
+		&-text {
+			padding-bottom: 3rem;
+			font-size: 3rem;
+			font-weight: 200;
+		}
+		&-input {
+			margin-bottom: 1.5rem;
+			padding: 1rem;
+			width: 100%;
+			border: 1px solid transparent;
+		}
+		&-btn {
+			padding: 0.8rem 1.6rem;
+			background: none;
+			color: $gold;
+			font-weight: bold;
+			border: 1px solid $white;
+			cursor: pointer;
+			transition: background-color 0.3s, color 0.3s;
+			&:hover {
+				background-color: $gold;
+				color: $red;
+			}
+		}
+	}
+}
+
+.gallery {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr 1fr;
+	&__foto {
+		width: 100%;
+		height: 300px;
+		object-fit: cover;
+		&:nth-child(odd) {
+			display: none;
+		}
+	}
+}
+
+.footer {
+	padding: 3em 1em;
+	border-top: 1px solid $darker;
+	text-align: center;
+}
+
+.contact {
+	padding: 10rem 2em;
+	&__form {
+		padding: 4rem 0;
+		&-box {
+			&-text {
+				font-size: 2rem;
+				padding-bottom: 0.4rem;
+				text-align: start;
+			}
+			&-input {
+				width: 100%;
+				margin-bottom: 1.5rem;
+				padding: 1rem;
+				border: 1px solid $darkgold;
+				color: $white;
+				background: none;
+				:focus {
+					outline: none;
+					border: 1px solid $gold;
+				}
+				&--textarea {
+					min-width: 100%;
+					max-width: 100%;
+					max-height: 200px;
+					min-height: 100px;
+				}
+			}
+		}
+		&-btn {
+			padding: 1rem 3rem;
+			background: none;
+			border: 1px solid $darkgold;
+			font-weight: bold;
+			color: $gold;
+			cursor: pointer;
+			transition: background-color 0.3s, color 0.3s;
+			&:hover {
+				background-color: $darkgold;
+				color: $dark;
+			}
+		}
+	}
+}
